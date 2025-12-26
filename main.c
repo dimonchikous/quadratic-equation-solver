@@ -14,15 +14,13 @@ int main(void){
 	char sb[MAXCHAR];
 	char sc[MAXCHAR];
 
-	char *trash;
-
 	inputd('a', sa);
 	inputd('b', sb);
 	inputd('c', sc);
 
-	double a = strtod(sa, &trash);
-	double b = strtod(sb, &trash);
-	double c = strtod(sc, &trash);
+	double a = strtod(sa, NULL);
+	double b = strtod(sb, NULL);
+	double c = strtod(sc, NULL);
 
 	if (a == 0){
 		printf("ERROR: a - cant be 0!\n");
