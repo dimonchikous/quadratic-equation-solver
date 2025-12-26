@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXCHAR 1000000
+#define MAXCHAR 202
 
 void inputd(char t, char s[]);
 void quadeq(double a, double b, double c);
