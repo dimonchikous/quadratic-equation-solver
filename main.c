@@ -2,58 +2,64 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXCHAR 202
+#define EPSILON 1e-9
 
-void inputd(char t, char s[]);
+double inputd(char name);
 void quadeq(double a, double b, double c);
 
 int main(void){
 	printf("Form of equation: ax^2+-bx+-c=0\n");
 
-	char sa[MAXCHAR];
-	char sb[MAXCHAR];
-	char sc[MAXCHAR];
+	double a, b, c;
 
-	inputd('a', sa);
-	inputd('b', sb);
-	inputd('c', sc);
+	a = inputd('a');
+	b = inputd('b');
+	c = inputd('c');
 
-	double a = strtod(sa, NULL);
-	double b = strtod(sb, NULL);
-	double c = strtod(sc, NULL);
-
-	if (a == 0){
+	if (fabs(a) < EPSILON){
 		printf("ERROR: a - cant be 0!\n");
-		return 0;
+		return 1;
 	}
+	printf("\n");
 
 	quadeq(a,b,c);
 	
 	return 0;
 }
 
-void inputd(char t, char s[]){
-	int i, c;
-	printf("Input %c: ", t);
-	for (i = 0; (c=getchar()) != '\n' && i < MAXCHAR - 1; i++)
-		s[i]=(char)c;
-	s[i] = '\0';
-	printf("\n");
+double inputd(char name){
+	double value;
+	
+	printf("Input %c: ", name);
+
+	while (scanf("%lf", &value) !=1){
+		printf("ERROR: Not a number!\n");
+
+		while (getchar() != '\n');
+
+		printf("Input %c: ", name);
+	}
+	return value;
 }
 
+
 void quadeq(double a, double b, double c){
-	double discr = pow(b,2)-4*a*c;
+	double discr = b*b-4*a*c;
 	printf("Discriminant is %f\n", discr);
-	if (discr > 0){
-		printf("2 answers\n");
-		double x1=((b*(-1))+sqrt(discr))/(2*a);
-		double x2=((b*(-1))-sqrt(discr))/(2*a);
-		printf("x1 = %f\nx2 = %f\n",x1,x2);
-	}
-	else if (discr==0){
+	if (fabs(discr)<EPSILON){
 		printf("1 answer\n");
-		double x=((b*(-1))+sqrt(discr))/(2*a);
+		double x=(-b)/(2*a);
+		if (fabs(x)<EPSILON)
+			x=0.0;
 		printf("x = %f\n", x);
+	}
+
+	else if (discr > 0){
+		printf("2 answers\n");
+		double sqrtd=sqrt(discr);
+		double x1=(-b+sqrtd)/(2*a);
+		double x2=(-b-sqrtd)/(2*a);
+		printf("x1 = %f\nx2 = %f\n",x1,x2);
 	}
 	else
 		printf("No answers\n");
