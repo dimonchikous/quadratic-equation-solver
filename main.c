@@ -8,7 +8,7 @@ double inputd(char name);
 void quadeq(double a, double b, double c);
 
 int main(void){
-	printf("Form of equation: ax^2+-bx+-c=0\n");
+	printf("Form of equation: ax^2+bx+c=0\n");
 
 	double a, b, c;
 
