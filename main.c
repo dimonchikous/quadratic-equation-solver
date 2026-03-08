@@ -1,6 +1,5 @@
 #include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define EPSILON 1e-9
 
